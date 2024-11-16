@@ -1,8 +1,8 @@
 package com.hollysgang.sample.distributedLock;
 
-import jakarta.transaction.Transactional;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.math.BigDecimal;
 
@@ -23,7 +23,7 @@ public class AccountService {
         return account.getBalance();
     }
 
-    @Transactional
+    @DistributedLock(key = "#accountId")
     public boolean withdraw(Long accountId, Long amount) {
         Account account = accountRepository.findById(accountId).orElse(null);
         if (account == null) {
@@ -34,7 +34,7 @@ public class AccountService {
         return true;
     }
 
-    @Transactional
+    @DistributedLock(key = "#accountId")
     public boolean deposit(Long accountId, Long amount) {
         Account account = accountRepository.findById(accountId).orElse(null);
         if (account == null) {
