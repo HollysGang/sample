@@ -6,7 +6,6 @@ import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 
-import java.math.BigDecimal;
 import java.time.LocalDateTime;
 @Getter
 @Entity
@@ -20,33 +19,33 @@ public class Account {
     private String name;
 
     @Column(nullable = false)
-    private BigDecimal balance;
+    private Long balance;
 
     private LocalDateTime createdDate;
 
     @Builder
-    public Account(String name, BigDecimal balance) {
+    public Account(String name, Long balance) {
         this.name = name;
         this.balance = balance;
         this.createdDate = LocalDateTime.now();
     }
 
     // 입금 메서드
-    public void deposit(BigDecimal amount) {
-        if (amount.compareTo(BigDecimal.ZERO) <= 0) {
+    public void deposit(Long amount) {
+        if (amount <= 0) {
             throw new IllegalArgumentException("입금 요청 금액이 0보다 작습니다.");
         }
-        this.balance = this.balance.add(amount);
+        this.balance = this.balance+amount;
     }
 
     // 출금 메서드
-    public void withdraw(BigDecimal amount) {
-        if (amount.compareTo(BigDecimal.ZERO) <= 0) {
+    public void withdraw(Long amount) {
+        if (amount <= 0) {
             throw new IllegalArgumentException("출금 요청 금액이 0보다 작습니다.");
         }
-        if (this.balance.compareTo(amount) < 0) {
+        if (this.balance - amount < 0) {
             throw new IllegalArgumentException("잔액이 충분하지 않습니다.");
         }
-        this.balance = this.balance.subtract(amount);
+        this.balance = this.balance- amount;
     }
 }

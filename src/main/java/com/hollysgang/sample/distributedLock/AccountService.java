@@ -1,5 +1,6 @@
 package com.hollysgang.sample.distributedLock;
 
+import jakarta.transaction.Transactional;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
@@ -11,18 +12,19 @@ public class AccountService {
 
     private final AccountRepository accountRepository;
 
-    public Account createAccount(String name, BigDecimal balance) {
+    public Account createAccount(String name, Long balance) {
         Account account = new Account(name, balance);
         return accountRepository.save(account);
     }
 
 
-    public BigDecimal getBalance(Long accountId) {
+    public Long getBalance(Long accountId) {
         Account account = accountRepository.findById(accountId).orElseThrow(() -> new RuntimeException("해당 ID의 계좌가 존재 하지 않습니다."));
         return account.getBalance();
     }
 
-    public boolean withdraw(Long accountId, BigDecimal amount) {
+    @Transactional
+    public boolean withdraw(Long accountId, Long amount) {
         Account account = accountRepository.findById(accountId).orElse(null);
         if (account == null) {
             return false;
@@ -32,7 +34,8 @@ public class AccountService {
         return true;
     }
 
-    public boolean deposit(Long accountId, BigDecimal amount) {
+    @Transactional
+    public boolean deposit(Long accountId, Long amount) {
         Account account = accountRepository.findById(accountId).orElse(null);
         if (account == null) {
             return false;
