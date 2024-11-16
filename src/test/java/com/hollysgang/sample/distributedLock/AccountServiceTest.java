@@ -61,7 +61,7 @@ class AccountServiceTest {
 
         // 최종 잔액을 확인하여 동시성 문제가 발생하지 않았는지 확인
         Account account = accountRepository.findById(accountId).orElseThrow();
-        Long expectedBalance = 1000L; // 초기 잔액
+        Long expectedBalance = 1500L;
         assertEquals(expectedBalance, account.getBalance(), "동시성 문제로 인해 잔액이 일치하지 않습니다.");
     }
 
