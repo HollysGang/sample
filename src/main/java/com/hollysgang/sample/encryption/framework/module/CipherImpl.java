@@ -1,5 +1,7 @@
 package com.hollysgang.sample.encryption.framework.module;
 
+import org.springframework.stereotype.Component;
+
 import javax.crypto.BadPaddingException;
 import javax.crypto.IllegalBlockSizeException;
 import javax.crypto.NoSuchPaddingException;
@@ -9,6 +11,7 @@ import java.security.InvalidKeyException;
 import java.security.NoSuchAlgorithmException;
 import java.util.Base64;
 
+@Component
 public class CipherImpl implements CipherManager {
 
     private final String AES_ALGORITHM = "AES";

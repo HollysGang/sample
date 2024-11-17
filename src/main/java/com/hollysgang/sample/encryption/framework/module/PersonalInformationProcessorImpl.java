@@ -3,7 +3,9 @@ package com.hollysgang.sample.encryption.framework.module;
 import com.hollysgang.sample.encryption.framework.core.PersonalInformationProcessor;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.stereotype.Component;
 
+@Component
 @RequiredArgsConstructor
 @Slf4j
 public class PersonalInformationProcessorImpl implements PersonalInformationProcessor {
