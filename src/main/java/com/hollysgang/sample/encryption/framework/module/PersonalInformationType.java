@@ -5,17 +5,17 @@ public enum PersonalInformationType {
     CARD_NUMBER("CARD_NUMBER"),
     ETC("ETC");
 
-    static public PersonalInformationType of(String name){
+    static public PersonalInformationType of(String id){
         for(PersonalInformationType type: PersonalInformationType.values()){
-            if(type.id.equals(name)){
+            if(type.id.equals(id)){
                 return type;
             }
         }
-        throw new IllegalArgumentException(name + " id의 PersonalInformationType은 존재하지 않습니다.");
+        throw new IllegalArgumentException(id + " id의 PersonalInformationType은 존재하지 않습니다.");
     }
 
-    private final String id;
-    PersonalInformationType(String name){
-        this.id = name;
+    public final String id;
+    PersonalInformationType(String id){
+        this.id = id;
     }
 }
