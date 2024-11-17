@@ -43,8 +43,9 @@ public class PersonalInformationProcessorImpl implements PersonalInformationProc
                 return encrypted.substring(0, 7) + decryptedLast6digits;
             }
             case CARD_NUMBER -> {
-                String decryptedFirst8digits = cipherManager.decrypt(encrypted.substring(0,8));
-                return decryptedFirst8digits + encrypted.substring(8);
+                String _encrypted = encrypted.substring(0, encrypted.length() - 8);
+                String decryptedFirst8digits = cipherManager.decrypt(_encrypted);
+                return decryptedFirst8digits + encrypted.substring(encrypted.length() - 8);
             }
             case ETC -> {
                 return cipherManager.decrypt(encrypted);
