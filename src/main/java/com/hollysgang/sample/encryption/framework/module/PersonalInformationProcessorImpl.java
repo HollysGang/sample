@@ -8,7 +8,7 @@ import lombok.extern.slf4j.Slf4j;
 @Slf4j
 public class PersonalInformationProcessorImpl implements PersonalInformationProcessor {
 
-    private final Cipher cipher;
+    private final CipherManager cipherManager;
 
     @Override
     public String encryptPersonalInformation(String type, String plain) {
@@ -16,16 +16,16 @@ public class PersonalInformationProcessorImpl implements PersonalInformationProc
         switch (piType){
             case RRN -> {
                 String trimmed = plain.replace("-" , "");
-                String encryptedLast6digits = cipher.encrypt(trimmed.substring(7));
+                String encryptedLast6digits = cipherManager.encrypt(trimmed.substring(7));
                 return plain.substring(0, 7) + encryptedLast6digits;
             }
             case CARD_NUMBER -> {
                 String trimmed = plain.replace("-" , "");
-                String encryptedFirst8digits = cipher.encrypt(trimmed.substring(0,8));
+                String encryptedFirst8digits = cipherManager.encrypt(trimmed.substring(0,8));
                 return encryptedFirst8digits + plain.substring(8);
             }
             case ETC -> {
-                return cipher.encrypt(plain);
+                return cipherManager.encrypt(plain);
             }
         }
         log.error("암호화 타입이 명확하지 않아, 암호화에 실패했습니다.");
@@ -37,15 +37,15 @@ public class PersonalInformationProcessorImpl implements PersonalInformationProc
         PersonalInformationType piType = PersonalInformationType.of(type);
         switch (piType){
             case RRN -> {
-                String decryptedLast6digits = cipher.decrypt(encrypted.substring(7));
+                String decryptedLast6digits = cipherManager.decrypt(encrypted.substring(7));
                 return encrypted.substring(0, 7) + decryptedLast6digits;
             }
             case CARD_NUMBER -> {
-                String decryptedFirst8digits = cipher.decrypt(encrypted.substring(0,8));
+                String decryptedFirst8digits = cipherManager.decrypt(encrypted.substring(0,8));
                 return decryptedFirst8digits + encrypted.substring(8);
             }
             case ETC -> {
-                return cipher.decrypt(encrypted);
+                return cipherManager.decrypt(encrypted);
             }
         }
         log.error("암호화 타입이 명확하지 않아, 복호화에 실패했습니다.");
