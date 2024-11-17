@@ -5,6 +5,7 @@ import lombok.extern.slf4j.Slf4j;
 import org.aspectj.lang.ProceedingJoinPoint;
 import org.aspectj.lang.annotation.Around;
 import org.aspectj.lang.annotation.Aspect;
+import org.springframework.aop.aspectj.AspectJExpressionPointcut;
 import org.springframework.stereotype.Component;
 
 import java.lang.reflect.Field;
@@ -14,11 +15,9 @@ import java.lang.reflect.Field;
 @Slf4j
 @RequiredArgsConstructor
 public class PersonalInformationAspect {
-
-    private final PersonalInformationPointcutConfig pointcutConfig;
     private final PersonalInformationProcessor piProcessor;
 
-    @Around("pointcutConfig.getEncryptionPointcut()")
+    @Around("execution(public * com.hollysgang.sample.encryption.demo.repository..*.*(..))")
     public Object doAroundAboutPersonalInformation(ProceedingJoinPoint joinPoint) throws Throwable {
         Object[] args = joinPoint.getArgs();
         doEncrypt(args);
@@ -26,7 +25,6 @@ public class PersonalInformationAspect {
         doDecrypt(result);
         return result;
     }
-
 
     // 일단 단일 DTO가 넘어온다고 가정
     private void doEncrypt(Object dto) {
