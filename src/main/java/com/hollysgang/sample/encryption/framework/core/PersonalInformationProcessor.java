@@ -1,7 +1,7 @@
 package com.hollysgang.sample.encryption.framework.core;
 
 public interface PersonalInformationProcessor {
-    String encryptPersonalInformation(PersonalInformationType type, String plain);
+    String encryptPersonalInformation(String type, String plain);
 
-    String decryptPersonalInformation(PersonalInformationType type, String encrypted);
+    String decryptPersonalInformation(String type, String encrypted);
 }
