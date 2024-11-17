@@ -16,7 +16,7 @@ public class CipherImpl implements CipherManager {
 
     private final String AES_ALGORITHM = "AES";
     private final String AES_MODE = "AES/ECB/PKCS5Padding";
-    private final String key = "DUMMY_KEY";
+    private final String key = "1234567890abcdef";
 
     @Override
     public String encrypt(String plainText)  {
