@@ -8,12 +8,12 @@ import java.util.List;
 
 import static org.junit.jupiter.api.Assertions.*;
 
-class AbstractPersonalInformationProcessorTest {
+class PersonalInformationProcessorReflectionTest {
 
     @Test
     void encryptPersonalInformation_DTO() {
         // given
-        AbstractPersonalInformationProcessor pip = new AbstractPersonalInformationProcessor(){};
+        PersonalInformationProcessorReflection pip = new PersonalInformationProcessorReflection();
         pip.setEncFunc("encTarget", (el) -> "encrypted:" + el);
         TestDto dto = new TestDto();
         dto.setEncryptField("I am Ironman");
@@ -30,7 +30,7 @@ class AbstractPersonalInformationProcessorTest {
     @Test
     void encryptPersonalInformation_ListOfDTO() {
         // given
-        AbstractPersonalInformationProcessor pip = new AbstractPersonalInformationProcessor(){};
+        PersonalInformationProcessorReflection pip = new PersonalInformationProcessorReflection();
         pip.setEncFunc("encTarget", (el) -> "encrypted:" + el);
         TestDto dto = new TestDto();
         dto.setEncryptField("I am Ironman");
@@ -52,7 +52,7 @@ class AbstractPersonalInformationProcessorTest {
     @Test
     void encryptPersonalInformation_DTOinDTO() {
         // given
-        AbstractPersonalInformationProcessor pip = new AbstractPersonalInformationProcessor(){};
+        PersonalInformationProcessorReflection pip = new PersonalInformationProcessorReflection();
         pip.setEncFunc("encTarget", (el) -> "encrypted:" + el);
         TestDto innerDto = new TestDto();
         innerDto.setEncryptField("I am Ironman");
@@ -75,7 +75,7 @@ class AbstractPersonalInformationProcessorTest {
     @Test
     void decryptPersonalInformation_DTO() {
         //given
-        AbstractPersonalInformationProcessor pip = new AbstractPersonalInformationProcessor(){};
+        PersonalInformationProcessorReflection pip = new PersonalInformationProcessorReflection();
         pip.setDecFunc("encTarget", (el) -> el.replace("encrypted:", ""));
         TestDto dto = new TestDto();
         dto.setEncryptField("encrypted:I am Ironman");
@@ -92,7 +92,7 @@ class AbstractPersonalInformationProcessorTest {
     @Test
     void decryptPersonalInformation_ListOfDto() {
         //given
-        AbstractPersonalInformationProcessor pip = new AbstractPersonalInformationProcessor(){};
+        PersonalInformationProcessorReflection pip = new PersonalInformationProcessorReflection();
         pip.setDecFunc("encTarget", (el) -> el.replace("encrypted:", ""));
         TestDto dto = new TestDto();
         dto.setEncryptField("encrypted:I am Ironman");
@@ -114,7 +114,7 @@ class AbstractPersonalInformationProcessorTest {
     @Test
     void decryptPersonalInformation_DTOinDTO() {
         //given
-        AbstractPersonalInformationProcessor pip = new AbstractPersonalInformationProcessor(){};
+        PersonalInformationProcessorReflection pip = new PersonalInformationProcessorReflection();
         pip.setDecFunc("encTarget", (el) -> el.replace("encrypted:", ""));
         TestDto innerDto = new TestDto();
         innerDto.setEncryptField("encrypted:I am Ironman");

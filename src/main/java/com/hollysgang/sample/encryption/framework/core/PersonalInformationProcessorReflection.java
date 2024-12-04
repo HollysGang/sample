@@ -10,7 +10,7 @@ import java.util.Map;
 import java.util.function.Function;
 
 @Slf4j
-public abstract class AbstractPersonalInformationProcessor implements PersonalInformationProcessor {
+public class PersonalInformationProcessorReflection implements PersonalInformationProcessor {
 
     private final Map<String, Function<String, String>> typeEncFuncs = new HashMap<>();
     private final Map<String, Function<String, String>> typeDecFuncs = new HashMap<>();

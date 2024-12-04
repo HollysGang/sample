@@ -1,6 +1,6 @@
 package com.hollysgang.sample.encryption.framework.module;
 
-import com.hollysgang.sample.encryption.framework.core.AbstractPersonalInformationProcessor;
+import com.hollysgang.sample.encryption.framework.core.PersonalInformationProcessorReflection;
 import com.hollysgang.sample.encryption.framework.core.PersonalInformationProcessor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.context.annotation.Bean;
@@ -12,7 +12,7 @@ public class PersonalInformationProcessorConfig {
 
     @Bean
     PersonalInformationProcessor personalInformationProcessor(CipherManager cipherManager){
-        AbstractPersonalInformationProcessor pip = new AbstractPersonalInformationProcessor() {};
+        PersonalInformationProcessorReflection pip = new PersonalInformationProcessorReflection();
         // encryption 설정
         pip.setEncFunc(PersonalInformationType.RRN.name(), (plain) -> {
             String trimmed = plain.replace("-" , "");
