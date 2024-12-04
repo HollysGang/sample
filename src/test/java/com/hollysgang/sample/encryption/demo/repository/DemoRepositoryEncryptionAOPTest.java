@@ -1,10 +1,12 @@
 package com.hollysgang.sample.encryption.demo.repository;
 
 import com.hollysgang.sample.encryption.demo.dto.DemoDto;
+import com.hollysgang.sample.encryption.framework.core.PITargetHolder;
 import com.hollysgang.sample.encryption.framework.core.PersonalInformationAspect;
 import com.hollysgang.sample.encryption.framework.core.PersonalInformationProcessor;
+import com.hollysgang.sample.encryption.framework.core.PersonalInformationProcessorCaching;
 import com.hollysgang.sample.encryption.framework.module.CipherImpl;
-import com.hollysgang.sample.encryption.framework.module.PersonalInformationProcessorConfig;
+import com.hollysgang.sample.encryption.framework.module.PersonalInformationProcessorSetup;
 import com.hollysgang.sample.encryption.framework.module.PersonalInformationType;
 import lombok.extern.slf4j.Slf4j;
 import org.junit.jupiter.api.Test;
@@ -20,7 +22,16 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 @ExtendWith(SpringExtension.class)
 @EnableAspectJAutoProxy(proxyTargetClass = true)
 @Slf4j
-@ContextConfiguration(classes = { CipherImpl.class, PersonalInformationProcessorConfig.class, PersonalInformationAspect.class, DemoRepository.class})
+@ContextConfiguration(
+        classes = {
+                CipherImpl.class,
+                PITargetHolder.class,
+                PersonalInformationProcessorCaching.class,
+                PersonalInformationProcessorSetup.class,
+                PersonalInformationAspect.class,
+                DemoRepository.class
+        }
+)
 class DemoRepositoryEncryptionAOPTest {
 
     @Autowired
