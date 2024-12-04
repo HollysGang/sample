@@ -1,6 +1,7 @@
 package com.hollysgang.sample.encryption.framework.core;
 
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.stereotype.Component;
 
 import java.util.Collection;
 import java.util.HashMap;
@@ -8,7 +9,8 @@ import java.util.Map;
 import java.util.function.Function;
 
 @Slf4j
-public class PersonalInformationProcessorCaching implements PersonalInformationProcessor{
+@Component
+public class PersonalInformationProcessorCaching implements PersonalInformationProcessor {
     private final PITargetHolder piTargetHolder;
     public PersonalInformationProcessorCaching(PITargetHolder piTargetHolder){
         this.piTargetHolder = piTargetHolder;
